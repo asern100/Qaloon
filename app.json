@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "مصحف قالون",
+    "slug": "qaloon",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#F6F1E6",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1F5C4E"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.asern100.qaloon"
+    },
+    "android": {
+      "package": "com.asern100.qaloon",
+      "adaptiveIcon": {
+        "backgroundColor": "#1F5C4E",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
