@@ -63,7 +63,7 @@ export function AppProvider({ children }) {
 
   const bookmarkKeys = useMemo(() => new Set(bookmarks.map((b) => `${b.sura}:${b.aya}`)), [bookmarks]);
 
-  const themeKey = settings.theme === 'auto' ? (scheme === 'dark' ? 'dark' : 'light') : settings.theme;
+  const themeKey = settings.theme === 'auto' ? (scheme === 'dark' ? 'dark' : 'rose') : settings.theme;
   const value = {
     ready, settings, setSetting, theme: THEMES[themeKey],
     bookmarks, bookmarkKeys, toggleBookmark, lastPage, setLastPage,

@@ -5,15 +5,15 @@ import * as Clipboard from 'expo-clipboard';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { Ionicons } from '@expo/vector-icons';
 import { useApp } from '../store';
-import { AYAHS, SURAS, TOTAL_PAGES, ar, pageInfo } from '../quran';
+import { AYAHS, FIRST_PAGE, SURAS, TOTAL_PAGES, ar, pageInfo } from '../quran';
 import { QURAN_FONT } from '../theme';
 import { ROW } from '../rtl';
 import QuranPage from '../components/QuranPage';
 import { IconButton } from '../components/ui';
 
-const PAGES = Array.from({ length: TOTAL_PAGES }, (_, i) => i + 1);
+const PAGES = Array.from({ length: TOTAL_PAGES - FIRST_PAGE + 1 }, (_, i) => i + FIRST_PAGE);
 
-export default function Reader({ page: startPage = 1, highlight: startHighlight, nav }) {
+export default function Reader({ page: startPage = FIRST_PAGE, highlight: startHighlight, nav }) {
   const { theme, settings, bookmarkKeys, toggleBookmark, setLastPage } = useApp();
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
@@ -37,8 +37,8 @@ export default function Reader({ page: startPage = 1, highlight: startHighlight,
   }).current;
 
   const goTo = useCallback((p) => {
-    const n = Math.max(1, Math.min(TOTAL_PAGES, p));
-    listRef.current?.scrollToIndex({ index: n - 1, animated: false });
+    const n = Math.max(FIRST_PAGE, Math.min(TOTAL_PAGES, p));
+    listRef.current?.scrollToIndex({ index: n - FIRST_PAGE, animated: false });
     setPage(n);
   }, []);
 
@@ -85,7 +85,7 @@ export default function Reader({ page: startPage = 1, highlight: startHighlight,
         inverted
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        initialScrollIndex={startPage - 1}
+        initialScrollIndex={Math.max(0, startPage - FIRST_PAGE)}
         getItemLayout={(_, index) => ({ length: width, offset: width * index, index })}
         onViewableItemsChanged={onViewable}
         viewabilityConfig={{ itemVisiblePercentThreshold: 60 }}
@@ -159,7 +159,7 @@ function JumpModal({ visible, theme, onClose, onGo }) {
   const [val, setVal] = useState('');
   const submit = () => {
     const n = parseInt(val.replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)), 10);
-    if (n >= 1 && n <= TOTAL_PAGES) { setVal(''); onGo(n); }
+    if (n >= FIRST_PAGE && n <= TOTAL_PAGES) { setVal(''); onGo(n); }
   };
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
@@ -171,7 +171,7 @@ function JumpModal({ visible, theme, onClose, onGo }) {
           onChangeText={setVal}
           onSubmitEditing={submit}
           keyboardType="number-pad"
-          placeholder={`١ – ${ar(TOTAL_PAGES)}`}
+          placeholder={`${ar(FIRST_PAGE)} – ${ar(TOTAL_PAGES)}`}
           placeholderTextColor={theme.muted}
           autoFocus
           style={[styles.input, { color: theme.text, borderColor: theme.border, textAlign: 'center' }]}

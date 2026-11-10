@@ -3,7 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useApp } from '../store';
-import { JUZ, SURAS, ar, findAyah, pageInfo } from '../quran';
+import { FIRST_PAGE, JUZ, SURAS, ar, findAyah, pageInfo } from '../quran';
 import { QURAN_FONT } from '../theme';
 import { ROW, RIGHT, START } from '../rtl';
 import { Divider, IconButton, StarNumber } from '../components/ui';
@@ -38,7 +38,7 @@ export default function Home({ nav }) {
         </View>
 
         <Pressable
-          onPress={() => nav.push('reader', { page: lastPage || 1 })}
+          onPress={() => nav.push('reader', { page: lastPage || FIRST_PAGE })}
           style={({ pressed }) => [styles.continue, { backgroundColor: theme.accent, opacity: pressed ? 0.9 : 1, flexDirection: ROW }]}
         >
           <View style={{ flex: 1, alignItems: START }}>
@@ -46,10 +46,10 @@ export default function Home({ nav }) {
               {lastPage ? 'متابعة القراءة' : 'ابدأ القراءة'}
             </Text>
             <Text style={{ color: theme.onAccent, fontSize: 22, fontFamily: QURAN_FONT, marginTop: 2 }}>
-              {pageInfo(lastPage || 1).sura.ar}
+              {pageInfo(lastPage || FIRST_PAGE).sura.ar}
             </Text>
             <Text style={{ color: theme.onAccent, opacity: 0.8, fontSize: 13, marginTop: 2 }}>
-              صفحة {ar(lastPage || 1)}، الجزء {ar(pageInfo(lastPage || 1).juz)}
+              صفحة {ar(lastPage || FIRST_PAGE)}، الجزء {ar(pageInfo(lastPage || FIRST_PAGE).juz)}
             </Text>
           </View>
           <View style={[styles.playCircle, { borderColor: theme.onAccent }]}>

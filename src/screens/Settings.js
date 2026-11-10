@@ -8,7 +8,8 @@ import { IconButton, TopBar } from '../components/ui';
 
 const THEME_OPTIONS = [
   { key: 'auto', label: 'تلقائي' },
-  { key: 'light', label: 'فاتح' },
+  { key: 'rose', label: 'وردي' },
+  { key: 'light', label: 'أخضر' },
   { key: 'sepia', label: 'ورقي' },
   { key: 'dark', label: 'ليلي' },
 ];
@@ -21,7 +22,7 @@ export default function Settings({ nav }) {
       <TopBar title="الإعدادات" onBack={nav.back} />
       <ScrollView contentContainerStyle={{ padding: 16, gap: 16 }}>
         <Card theme={theme} title="المظهر">
-          <View style={{ flexDirection: ROW, gap: 8 }}>
+          <View style={{ flexDirection: ROW, gap: 8, flexWrap: 'wrap' }}>
             {THEME_OPTIONS.map((o) => {
               const on = settings.theme === o.key;
               return (
@@ -76,6 +77,6 @@ function Card({ theme, title, children }) {
 
 const styles = StyleSheet.create({
   card: { borderRadius: 18, padding: 16, borderWidth: StyleSheet.hairlineWidth },
-  chip: { flex: 1, alignItems: 'center', paddingVertical: 10, borderRadius: 12, borderWidth: 1 },
+  chip: { flexGrow: 1, minWidth: 70, alignItems: 'center', paddingVertical: 10, borderRadius: 12, borderWidth: 1 },
   about: { fontSize: 14, lineHeight: 24, textAlign: RIGHT },
 });
