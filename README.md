@@ -28,5 +28,6 @@ npx eas-cli@latest build -p android --profile preview
 
 ## المصادر والتراخيص
 - نص المصحف (رواية قالون، الإصدار ١٠) وخط `qaloon.10.ttf` من **مجمع الملك فهد لطباعة المصحف الشريف** (KFGQPC) عبر [quran-data-kfgqpc](https://github.com/thetruetruth/quran-data-kfgqpc). الخط مرخّص للاستخدام المجاني من المجمع ولا يجوز تعديله.
+- توزيع السطور (١٥ سطرًا كلمة بكلمة) لصفحات الفاتحة والبقرة مأخوذ من [zonetecde/mushaf-layout](https://github.com/zonetecde/mushaf-layout) (تخطيط المصحف المدني)، ويطابق المصحف المطبوع برواية قالون. `scripts/align.py` يعيد توزيع نص قالون على هذه السطور.
 - `scripts/build-data.py` يحوّل ملف JSON الأصلي إلى `src/data/quran.json`.
 - `scripts/make-icons.py` يولّد أيقونة التطبيق.
